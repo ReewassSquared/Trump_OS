@@ -8,7 +8,7 @@ void set_timer_rate(int hz)
 	outportb(0x40, divisor >> 8);
 }
 
-unsigned int timer_ticks; 
+volatile unsigned int timer_ticks; 
 
 void time_handler(struct regs *r)
 {
@@ -30,11 +30,13 @@ void timer_init()
 	timer_ticks = 0;
 }
 
+unsigned int get_timer_ticks(void)
+{
+	return timer_ticks;
+}
+
 void timer_stall(unsigned int ticks)
 {
-	unsigned int tick_elapse = timer_ticks + ticks;
-	while (timer_ticks < tick_elapse)
-	{
-		
-	}
+	volatile unsigned int tick_elapse = timer_ticks + ticks;
+	while (timer_ticks < tick_elapse);
 }

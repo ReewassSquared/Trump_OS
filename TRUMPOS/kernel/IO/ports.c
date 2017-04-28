@@ -34,3 +34,37 @@ void outportb (unsigned short _port, unsigned char _data)
     __asm__ __volatile__ ("outb %1, %0" : : "dN" (_port), "a" (_data));
 }
 
+unsigned short inportw (unsigned short _port)
+{
+    unsigned short rv;
+    __asm__ __volatile__ ("inw %1, %0" : "=a" (rv) : "dN" (_port));
+    return rv;
+}
+
+void outportw (unsigned short _port, unsigned short _data)
+{
+    __asm__ __volatile__ ("outw %1, %0" : : "dN" (_port), "a" (_data));
+}
+
+unsigned int inportd (unsigned short _port)
+{
+    unsigned int rv;
+    __asm__ __volatile__ ("inl %1, %0" : "=a" (rv) : "dN" (_port));
+    return rv;
+}
+
+void outportd (unsigned short _port, unsigned int _data)
+{
+    __asm__ __volatile__ ("outl %1, %0" : : "dN" (_port), "a" (_data));
+}
+
+void disable_interrupts(void)
+{
+	__asm__ __volatile__ ("cli");
+}
+
+void enable_interrupts(void)
+{
+	__asm__ __volatile__ ("sti");
+}
+

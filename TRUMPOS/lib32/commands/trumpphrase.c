@@ -23,6 +23,6 @@ extern string trump_catch_phrases[15] =
 
 void trumpphrase(unsigned int length, unsigned short *message)
 {
-	unsigned short g = rand();
+	unsigned short g = rand(get_timer_ticks());
 	putstr(trump_catch_phrases[g % 15]);
 }

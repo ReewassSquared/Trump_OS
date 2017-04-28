@@ -137,13 +137,36 @@ unsigned int charocc_times(unsigned char *str, unsigned char f)
 	return ret;
 }
 
-void num_to_string(int r, int base, int yloc)
+char* itoa(size_t val, size_t base){
+	
+	static char buf[32] = {0};
+	
+	short i = 30;
+
+	if(val == 0)
+	{
+		return "0";
+	}
+	
+	for(; val && i ; --i, val /= base)
+	
+		buf[i] = "0123456789ABCDEF"[val % base];
+	
+	for(int u = 0; u < 32; u++)
+		buf[i] = 0;
+
+	return &buf[i+1];
+	
+}
+
+string num_to_string(size_t r, size_t base, unsigned char *buf)
 {
+	uint32_t temp = (uint32_t) buf;
 	int g = 0;
 	char convert[25] = {0};
 	if( r == 0 )
 	{
-		putchar_at('0', yloc, (SCREENWIDTH - 1));
+		buf[0] = '0';
 	}
 	else if(r < 0)
 	{
@@ -170,13 +193,16 @@ void num_to_string(int r, int base, int yloc)
 		g++;
 	}
 	convert[g] = '\0';
-	char *ret[strlen(convert) + 1];
 	int x;
+	int y = strlen(convert);
+	convert[g] = 0;
 	for(x = 0; x < strlen(convert); x++)
 	{
-		ret[x] = convert[x];
-		putchar_at(ret[x], yloc, (SCREENWIDTH - 1) - x);
+		buf[y - x] = convert[x];
 	}
+	buf[y] = '\0';
+	buf = (unsigned char *) temp;
+	return buf;
 }
 /*
 #define INT_DIGITS 19		// enough for 64 bit integer 

@@ -24,6 +24,8 @@
 #include <string.h>
 #include <cmd.h>
 #include <rand.h>
+#include <stdio.h> //<-- contains the pci bus stuff and some of the usb stuff.
+#include <drivers/pci.h>
 
 struct regs
 {
@@ -33,12 +35,45 @@ struct regs
 	unsigned int eip, cs, eflags, useresp, ss;
 };
 
+//here is a registry of environment flags and variables for the purpose of stuff.
+
+struct registry
+{
+	bool print_all_messages;
+	bool print_boot_messages;
+	uint32_t UHCI_base;
+	uint32_t UHCI_size;
+	uint32_t OHCI_base;
+	uint32_t OCHI_size;
+	uint32_t EHCI_base;
+	uint32_t EHCI_size;
+	uint32_t xHCI_base;
+	uint32_t xHCI_size;
+};
+
+typedef struct __attribute__((packed)) time
+{
+	short miliseconds;
+	byte seconds;
+	byte minutes;
+	byte hours;
+	short days;
+	byte weeks;
+	short years;
+} time;
+
 //general-purpose programs for use later... 
 extern unsigned char *memcpy(void *dest, const void *src, size_t count);
 extern unsigned char *memset(void *dest, char val, size_t count);
 extern unsigned short *memsetw(unsigned short *dest, unsigned short val, size_t count);
 extern unsigned char inportb (unsigned short _port);
 extern void outportb (unsigned short _port, unsigned char _data);
+extern unsigned short inportw (unsigned short _port);
+extern void outportw (unsigned short _port, unsigned short _data);
+extern unsigned int inportd (unsigned short _port);
+extern void outportd (unsigned short _port, unsigned int _data);
+extern void disable_interrupts(void);
+extern void enable_interrupts(void);
 
 //screen functions for text stuff
 extern void clearscreen();
@@ -61,6 +96,7 @@ extern void irq_init();
 extern void irq_install_handler(int irq, void (*handler) (struct regs *r));
 extern void irq_uninstall_handler(int irq);
 extern void timer_init();
+extern unsigned int get_timer_ticks(void);
 extern void timer_stall();
 extern void keyboard_init();
 
@@ -69,6 +105,22 @@ extern bool rtrn;
 extern void init_commands();
 
 extern string trump_catch_phrases[]; 
+
+//timer stuff
+
+extern void set_frequency(size_t set);
+extern void rtc_init(void);
+extern time get_time(void);
+extern void set_time(time nt);
+extern byte get_seconds(void);
+extern byte get_minutes(void);
+extern byte get_hours(void);
+extern short get_days(void);
+extern byte get_weeks(void);
+extern short get_years(void);
+extern void rtc_stall(size_t y);
+
+extern struct registry ENVIRONMENT_VARS;
 
 //extern string get_cmd();
 

@@ -26,6 +26,8 @@ i686-elf-gcc -ffreestanding -Wall -Wextra -fno-builtin -nostdinc -I./include -st
 i686-elf-gcc -ffreestanding -Wall -Wextra -fno-builtin -nostdinc -I./include -std=gnu99 -nostdlib  -c lib32/commands/listcolor.c -o obj/listcolor.o
 i686-elf-gcc -ffreestanding -Wall -Wextra -fno-builtin -nostdinc -I./include -std=gnu99 -nostdlib  -c lib32/commands/trumpphrase.c -o obj/trumpphrase.o
 i686-elf-gcc -ffreestanding -Wall -Wextra -fno-builtin -nostdinc -I./include -std=gnu99 -nostdlib  -c lib32/rand.c -o obj/rand.o
+i686-elf-gcc -ffreestanding -Wall -Wextra -fno-builtin -nostdinc -I./include -std=gnu99 -nostdlib  -c kernel/drivers/rtc.c -o obj/rtc.o
+i686-elf-gcc -ffreestanding -Wall -Wextra -fno-builtin -nostdinc -I./include -std=gnu99 -nostdlib  -c kernel/IO/pci.c -o obj/pci.o
 nasm -f elf32 ASM/start.asm -o obj/start.o
-i686-elf-gcc -Wall -Wextra -ffreestanding -nostdlib -lgcc -T compile/linker.ld -o trumpos.img obj/start.o obj/string.o obj/main.o obj/scrnlib.o obj/gdt.o obj/idt.o obj/irq.o obj/isrs.o obj/timer.o obj/keyboard.o obj/cmd.o obj/ports.o obj/echo.o obj/help.o obj/menu.o obj/debug.o obj/vars.o obj/calc.o obj/screencolor.o obj/fontcolor.o obj/get.o obj/listcolor.o obj/trumpphrase.o obj/rand.o
+i686-elf-gcc -Wall -Wextra -ffreestanding -nostdlib -lgcc -T compile/linker.ld -o trumpos.img obj/start.o obj/string.o obj/main.o obj/scrnlib.o obj/gdt.o obj/idt.o obj/irq.o obj/isrs.o obj/timer.o obj/keyboard.o obj/cmd.o obj/ports.o obj/echo.o obj/help.o obj/menu.o obj/debug.o obj/vars.o obj/calc.o obj/screencolor.o obj/fontcolor.o obj/get.o obj/listcolor.o obj/trumpphrase.o obj/rand.o obj/rtc.o obj/pci.o
 cd compile

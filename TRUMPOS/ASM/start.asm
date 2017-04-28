@@ -199,7 +199,7 @@ start:
 	jnc setup
 
 	diskthingy:	db 16,0	
-	.read_sector: dw 49
+	.read_sector: dw 80
 	.offset: dw 7e00h
 	.segment: dw 0000h
 	.end: dq 1H

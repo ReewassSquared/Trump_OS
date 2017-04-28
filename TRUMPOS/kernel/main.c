@@ -2,10 +2,12 @@
 #include <commands/include_commands.h>
 
 bool rtrn = false;
-
+struct registry ENVIRONMENT_VARS;
 
 void main()
 {	/*initialization functions*/
+	ENVIRONMENT_VARS.print_all_messages = true;
+	ENVIRONMENT_VARS.print_boot_messages = true;
 	init_video();
 	/*THESE ARE TEST THINGIES:
 	for(int x = 32; x < 256; x++)	
@@ -19,9 +21,14 @@ void main()
 	isrs_init();
 	irq_init();
 	timer_init();
-	//timer_stall(15); ERRORS WITH TIMER... Lol
+	/*for(int u = 0; u < 10; u++)
+	{
+		putchar('.');
+		timer_stall(18);
+	} HUH. I THOUGHT THIS WOULD WORK. OOPS. */
 	keyboard_init();
 	/*finally*/
+	search_for_usb_controllers();
 	putstr("\n\nTRUMP_OS>>>");
 	set_cmd_x(get_x());
 	set_cmd_y(get_y());

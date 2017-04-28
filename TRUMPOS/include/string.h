@@ -14,7 +14,7 @@ extern string bool_to_string(bool r);
 extern bool charocc(unsigned char *str, unsigned char f);
 extern unsigned int charocc_times(unsigned char *str, unsigned char f);
 extern string removechar(string g, char r);
-extern void num_to_string(int r, int base, int yloc);
-//extern char* itoa(int i);
+extern string num_to_string(size_t r, size_t base, unsigned char *buf);
+extern char* itoa(size_t i, size_t base);
 
 #endif

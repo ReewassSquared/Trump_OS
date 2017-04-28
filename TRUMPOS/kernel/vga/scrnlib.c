@@ -64,7 +64,7 @@ void scroll(void)
 		
 		cursor_y = SCREENHEIGHT - 1;
 		cmd_origin_y--;
-		num_to_string(get_cmd_y(), 10, 0);
+		//num_to_string(get_cmd_y(), 10, 0);
 	}
 }
 
