@@ -1,3 +1,10 @@
+; (C)opyright of D-TEK Software Development. 2016-2017. All rights reserved.
+
+; NAME: START.ASM
+/ FUNCTION: This 
+
+
+
 
 [bits 16]
 global start
