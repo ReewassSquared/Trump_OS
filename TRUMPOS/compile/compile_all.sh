@@ -1,8 +1,6 @@
-cd
-cd barebones-toolchain
-. ./setenv.sh
-cd
-cd Desktop/TRUMPOS
+~/barebones-toolchain/setenv.sh
+cd ..
+
 i686-elf-gcc -ffreestanding -Wall -Wextra -fno-builtin -nostdinc -I./include -std=gnu99 -nostdlib  -c kernel/main.c -o obj/main.o
 i686-elf-gcc -ffreestanding -Wall -Wextra -fno-builtin -nostdinc -I./include -std=gnu99 -nostdlib  -c kernel/vga/scrnlib.c -o obj/scrnlib.o
 i686-elf-gcc -ffreestanding -Wall -Wextra -fno-builtin -nostdinc -I./include -std=gnu99 -nostdlib  -c kernel/gdt.c -o obj/gdt.o
